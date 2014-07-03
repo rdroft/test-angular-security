@@ -1,6 +1,8 @@
 /**
  * Created by roland on 7/1/14.
  */
+"use strict";
+
 var services = angular.module('drt-services',['ngCookies','ngRoute']);
 
 services.factory('Auth',function($http,$rootScope,$cookieStore){
