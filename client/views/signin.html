@@ -1,25 +1,10 @@
 <div ng-controller="SignInCtrl" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-   <!--
-  <div class="container">
-      <form class="form-signin">
-          <h2 class="form-signin-heading">
-              Please Signin
-          </h2>
-          <input type="email" required class="input-block-level" ng-model="email" placeholder="Email address">
-          <input type="password" required class="input-block-level"  placeholder="Email address" ng-model="password">
-          <a href="" class="input-block-level" ng-click="singIn()">SignIn</a>
-          <p>
-              In case you don't have login please <a href="#/signup">Sign Up</a>
-          </p>
-      </form>
-  </div>
-  -->
     <div class="container">
-        <form class="form-signin" ng-submit="signIn()">
+        <form class="form-signin" ng-submit="signIn()" role="form">
             <h2 class="form-signin-heading">Please sign in</h2>
             <input type="email"  placeholder="Email address" ng-model="email"/>
             <input type="password"  placeholder="Password" ng-model="password"/><br/>
-            <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+            <a href="" ng-click="singIn()">Sign In</a>
         </form>
 
     </div>

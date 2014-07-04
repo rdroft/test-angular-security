@@ -59,7 +59,7 @@
         $scope.count = 0;
         $scope.singIn = function () {
             console.log("user: " + $scope.email + " pp: " + $scope.password);
-            if ($scope.email == "user" & $scope.password == "123") {
+            if ($scope.email == "user@user" & $scope.password == "123") {
                 $rootScope.user = {username: $scope.email, role: routingConfig.userRoles.user};
                 console.log("navigate to");
                 $location.path("/");
@@ -75,16 +75,26 @@
     app.controller('DashboardCtrl', function ($location) {
 
     });
-    app.controller('SignUpCtrl', function ($scope,$location) {
-            $scope.message="";
+    app.controller('SignUpCtrl', function ($scope, $location) {
+            $scope.message = "";
             $scope.singUp = function () {
-                  if($scope.password ==$scope.password2){
-                      $location.path('/signin');
-                  }else{
-                      $scope.message= "Passwords should be equal";
-                  }
+                if ($scope.password == $scope.password2) {
+                    $location.path('/signin');
+                } else {
+                    $scope.message = "Passwords should be equal";
+                }
             }
         }
     );
+
+    app.controller('MainCtrl', function ($scope, $rootScope) {
+        $scope.menue_template = 'views/mainmenue.html';
+        var user = $rootScope.user;
+        if (user !== undefined) {
+            if (user.role == routingConfig.userRoles.user) {
+                $scope.menue_template = '';
+            }
+        }
+    });
 
 })();

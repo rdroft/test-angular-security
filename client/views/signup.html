@@ -1,27 +1,7 @@
 <h2>Please Sign Up</h2>
 <div ng-controller="SignUpCtrl">
-    <p>
-  {{message}}
-    </p>
-    <table>
-        <tr>
-            <td>Email:</td>
-            <td nowrap>
-                <div class="input-validation"></div>
-                <input type="email" name="email" required placeholder="Enter a valid email address" size="26"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" size="26" ng-model="password" required="true"></td>
-        </tr>
-        <tr>
-            <td>Password again</td>
-            <td><input type="password" size="26" ng-model="password2" required="true"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><a href="" ng-click="singUp()">Sign Up</a></td>
-        </tr>
-    </table>
+      <input type="email" name="email" required placeholder="Enter a valid email address" size="26"/><br/>
+      <input type="password" size="26" ng-model="password" placeholder="Password" required="true"/><br/>
+      <input type="password" size="26" ng-model="password2" placeholder="Password Again" required="true"/><br/>
+      <a href="" ng-click="singUp()">Sign Up</a>
 </div>
