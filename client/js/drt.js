@@ -90,13 +90,14 @@
     );
 
     app.controller('MainCtrl', function ($scope, Auth) {
-
+        $scope.show = {signup:true}
         $scope.menue_template = 'views/mainmenue.html';
         $scope.username = "";
         $scope.showSignUp = false;
         $scope.$on('LoginSuccess', function () {
             $scope.username = Auth.getUser().username;
             $scope.showSignUp = Auth.isLoggedIn();
+            $scope.show = {signup:false}
         })
     });
 

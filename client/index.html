@@ -28,13 +28,15 @@
             </div>
             <div class="navbar-right">
                 <ul class="nav navbar-nav">
-                    <li><a href="#signup">Sign Up</a></li>
+                    <li ng-show="show.signup"><a href="#signup">Sign Up</a></li>
                     <li><a href="">{{username}}</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </form>
-<div ng-view></div>
+<div class="jumbotron">
+<div class="container-fluid" ng-view></div>
+</div>
 </body>
 </html>
