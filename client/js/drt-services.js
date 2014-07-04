@@ -9,11 +9,19 @@ services.factory('Auth',function($http,$rootScope,$cookieStore){
     var accessLevels = routingConfig.accessLevels;
     var userRoles = routingConfig.userRoles;
     var currentUser =$rootScope.user || {username:'',role:userRoles.public};
-
+    var knownUsers = [
+        {username:'user@drt.com',role:userRoles.user,password:'123'},
+        {username:'admin@drt.com',role:userRoles.admin,password:'123'},
+        {username:'public@drt.com',role:userRoles.public,password:'123'}
+    ];
     console.log("roles: "+JSON.stringify(userRoles));
     var user = function(){
             return $rootScope.user||currentUser;
         };
+    var statusChanged = function(){
+        console.log("send evt");
+        $rootScope.$broadcast('LoginSuccess');
+    };
     return {
         authorize : function(requiredRole){
               if(user()===undefined){
@@ -29,8 +37,6 @@ services.factory('Auth',function($http,$rootScope,$cookieStore){
             if(user()===undefined){
                 return false;
             }
-            console.log("user: "+JSON.stringify(user()));
-            console.log("islogin::"+(user().role === userRoles.user||userRoles.admin));
             return (user().role === userRoles.user||userRoles.admin);
         },
         register:function(user,success,error){
@@ -38,7 +44,27 @@ services.factory('Auth',function($http,$rootScope,$cookieStore){
                   $rootScope.user=user;
                   success(user);
               }).error(error);
+        } ,
+        getUser: function(){
+           return user();
         },
+        login:function(email,password){
+            console.log("try to login: "+email);
+            var users = knownUsers.filter(function(value, index, ar){
+                if(email == value.username&&password==value.password){
+                    return value;
+                }
+            });
+            var user = users[0];
+            if(user==undefined){
+
+            }else{
+                $rootScope.user=user;
+              console.log("loggedin: "+this.isLoggedIn());
+                statusChanged();
+            }
+        }
+        ,
         accessLevels: accessLevels,
         userRoles: userRoles
     }

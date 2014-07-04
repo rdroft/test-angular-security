@@ -53,23 +53,25 @@
             access: access.public
         });
     });
-    app.controller('SignInCtrl', function ($scope, $rootScope, $location) {
-        $scope.email = "user@user";
+    app.controller('SignInCtrl', function ($scope, $rootScope, $location, Auth) {
+        $scope.email = "user@drt.com";
         $scope.password = "123";
         $scope.count = 0;
         $scope.singIn = function () {
-            console.log("user: " + $scope.email + " pp: " + $scope.password);
-            if ($scope.email == "user@user" & $scope.password == "123") {
-                $rootScope.user = {username: $scope.email, role: routingConfig.userRoles.user};
-                console.log("navigate to");
-                $location.path("/");
-            } else {
-                console.log("wrong passw: " + $scope.count);
-                if ($scope.count++ == 3) {
-                    console.log("nav to: /restorepasswd " + $scope.count);
-                    $location.path('/restorepasswd');
+            $scope.$on('LoginSuccess', function () {
+                console.log("got event:"+Auth.isLoggedIn());
+                if (Auth.isLoggedIn()) {
+                    console.log("navigate to /");
+                    $location.path("/");
+                } else {
+                    console.log("wrong passw: " + $scope.count);
+                    if ($scope.count++ == 3) {
+                        console.log("nav to: /restorepasswd " + $scope.count);
+                        $location.path('/restorepasswd');
+                    }
                 }
-            }
+            });
+            Auth.login($scope.email, $scope.password);
         }
     });
     app.controller('DashboardCtrl', function ($location) {
@@ -87,14 +89,15 @@
         }
     );
 
-    app.controller('MainCtrl', function ($scope, $rootScope) {
+    app.controller('MainCtrl', function ($scope, Auth) {
+
         $scope.menue_template = 'views/mainmenue.html';
-        var user = $rootScope.user;
-        if (user !== undefined) {
-            if (user.role == routingConfig.userRoles.user) {
-                $scope.menue_template = '';
-            }
-        }
+        $scope.username = "";
+        $scope.showSignUp = false;
+        $scope.$on('LoginSuccess', function () {
+            $scope.username = Auth.getUser().username;
+            $scope.showSignUp = Auth.isLoggedIn();
+        })
     });
 
 })();
