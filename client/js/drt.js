@@ -25,8 +25,7 @@
 })(typeof exports === 'undefined' ? this['routingConfig'] = {} : exports);
 
 
-(function () {
-    var app = angular.module('drt', ['drt-services',"ui.bootstrap", "ngRoute", "ngCookies"]);
+var app = angular.module('drt', ['drt-services',"ui.bootstrap", "ngRoute", "ngCookies"]);
     app.config(function ($routeProvider) {
         var access = routingConfig.accessLevels;
         $routeProvider.when('/signup', {
@@ -74,9 +73,33 @@
             Auth.login($scope.email, $scope.password);
         }
     });
-    app.controller('DashboardCtrl', function ($location) {
+    /**
+    var CreateDraftCtrl = function($scope,$modalInstance){
+        $scope.ok= function(){
+            $modalInstance.close();
+        };
+    };
 
-    });
+
+    app.controller('DashboardCtrl', function ($scope,$location,$modal) {
+
+        $scope.createNew = function(){
+           var modalInstance = $modal.open({
+                templateUrl: 'views/createdraft.html',
+                controller: CreateDraftCtrl,
+                size: 'sm',
+                resolve:{
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+    })
+*/
     app.controller('SignUpCtrl', function ($scope, $location) {
             $scope.message = "";
             $scope.singUp = function () {
@@ -100,5 +123,32 @@
             $scope.show = {signup:false}
         })
     });
+    app.controller('DashboardCtrl', function($scope,  $modal) {
+        $scope.createDraft = function() {
+            $scope.opts = {
+                backdrop: true,
+                backdropClick: true,
+                dialogFade: false,
+                keyboard: true,
+                templateUrl : 'views/createdraft.html',
+                controller : CreateDraftCtrl,
+                resolve: {} // empty storage
+            };
+            var modalInstance = $modal.open($scope.opts);
+            modalInstance.result.then(function(){
+                console.log("Modal Closed");
+            },function(){
+                console.log("Modal Closed");
+            });
+        };
+    })
 
-})();
+    var CreateDraftCtrl = function($scope, $modalInstance, $modal) {
+        $scope.ok = function () {
+            $modalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    }

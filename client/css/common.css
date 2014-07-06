@@ -28,3 +28,13 @@
 }
 .form-signin a {
 }
+
+.CreateDraft {
+
+}
+.CreateDraft input {
+    width: 100%;
+}
+.form-element {
+    margin: 10,10,10,10;
+}
