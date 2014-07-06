@@ -8,6 +8,7 @@
     <script src="libs/angular-resource.js"></script>
     <script src="libs/angular-route.js"></script>
     <script src="libs/angular-cookies.js"></script>
+    <script src="libs/ui-bootstrap-tpls.js"></script>
     <script src="js/drt-services.js"></script>
     <script src="js/drt.js"></script>
     <title>Design Review Tool</title>
@@ -36,7 +37,11 @@
     </div>
 </form>
 <div class="jumbotron">
-<div class="container-fluid" ng-view></div>
+    <div class="container-fluid">
+        <div ng-view></div>
+    </div>
+    <hr>
+    <footer></footer>
 </div>
 </body>
 </html>

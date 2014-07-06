@@ -26,7 +26,7 @@
 
 
 (function () {
-    var app = angular.module('drt', ['drt-services', "ngRoute", "ngCookies"]);
+    var app = angular.module('drt', ['drt-services',"ui.bootstrap", "ngRoute", "ngCookies"]);
     app.config(function ($routeProvider) {
         var access = routingConfig.accessLevels;
         $routeProvider.when('/signup', {
