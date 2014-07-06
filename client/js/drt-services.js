@@ -40,7 +40,7 @@ services.factory('Auth',function($http,$rootScope,$cookieStore){
         };
     var statusChanged = function(){
         console.log("send evt");
-        $rootScope.$broadcast('LoginSuccess');
+        $rootScope.$broadcast('LoginUpdated');
     };
     return {
         authorize : function(requiredRole){
@@ -57,7 +57,7 @@ services.factory('Auth',function($http,$rootScope,$cookieStore){
             if(user()===undefined){
                 return false;
             }
-            return (user().role === userRoles.user||userRoles.admin);
+            return user().role === userRoles.user||user().role===userRoles.admin;
         },
         register:function(user,success,error){
               $http.post('signin',user).success(function(user){
@@ -77,7 +77,7 @@ services.factory('Auth',function($http,$rootScope,$cookieStore){
             });
             var user = users[0];
             if(user==undefined){
-
+                statusChanged();
             }else{
                 $rootScope.user=user;
               console.log("loggedin: "+this.isLoggedIn());

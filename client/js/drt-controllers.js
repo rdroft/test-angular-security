@@ -7,8 +7,8 @@ app.controller('SignInCtrl', function ($scope, $rootScope, $location, Auth) {
     $scope.password = "123";
     $scope.count = 0;
     $scope.singIn = function () {
-        $scope.$on('LoginSuccess', function () {
-            console.log("got event:"+Auth.isLoggedIn());
+        $scope.$on('LoginUpdated', function () {
+            console.log("got isLOggedin: "+Auth.isLoggedIn());
             if (Auth.isLoggedIn()) {
                 console.log("navigate to /");
                 $location.path("/");
@@ -41,10 +41,12 @@ app.controller('MainCtrl', function ($scope, Auth) {
     $scope.menue_template = 'views/mainmenue.html';
     $scope.username = "";
     $scope.showSignUp = false;
-    $scope.$on('LoginSuccess', function () {
-        $scope.username = Auth.getUser().username;
-        $scope.showSignUp = Auth.isLoggedIn();
-        $scope.show = {signup:false}
+    $scope.$on('LoginUpdated', function () {
+        if(Auth.isLoggedIn()) {
+            $scope.username = Auth.getUser().username;
+            $scope.showSignUp = Auth.isLoggedIn();
+            $scope.show = {signup: false}
+        }
     })
 });
 
