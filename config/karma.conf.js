@@ -20,7 +20,7 @@ module.exports = function(config){
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome','Safari'],
+    browsers : ['Chrome'],
 
     plugins : [
             'karma-junit-reporter',
