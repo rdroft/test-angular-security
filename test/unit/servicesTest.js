@@ -5,7 +5,6 @@
 describe('AuthTest',function(){
     var auth;
     var rootScope;
-    var exp;
     var testUser = {username:'user@drt.com',role:2,password:'123'};
     //excuted before each "it" is run.
     beforeEach(function() {
