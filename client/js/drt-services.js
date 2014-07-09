@@ -34,12 +34,11 @@ services.factory('Auth',function($http,$rootScope,$cookieStore){
         {username:'admin@drt.com',role:userRoles.admin,password:'123'},
         {username:'public@drt.com',role:userRoles.public,password:'123'}
     ];
-    console.log("roles: "+JSON.stringify(userRoles));
+    console.log("Auth roles: "+JSON.stringify(userRoles));
     var user = function(){
             return $rootScope.user||currentUser;
         };
     var statusChanged = function(){
-        console.log("send evt");
         $rootScope.$broadcast('LoginUpdated');
     };
     return {
@@ -69,7 +68,7 @@ services.factory('Auth',function($http,$rootScope,$cookieStore){
            return user();
         },
         login:function(email,password){
-            console.log("try to login: "+email);
+            console.log("Auth try to login: "+email);
             var users = knownUsers.filter(function(value, index, ar){
                 if(email == value.username&&password==value.password){
                     return value;
@@ -80,7 +79,7 @@ services.factory('Auth',function($http,$rootScope,$cookieStore){
                 statusChanged();
             }else{
                 $rootScope.user=user;
-              console.log("loggedin: "+this.isLoggedIn());
+              console.log("Auth: loggedin: "+this.isLoggedIn());
                 statusChanged();
             }
         }
@@ -91,17 +90,25 @@ services.factory('Auth',function($http,$rootScope,$cookieStore){
 });
 
 services.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
-
+ var signInPage = '/signin';
+ var rootPage = '/';
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
         var authResult = Auth.authorize(next.access);
-        console.log("X1 try: "+next.originalPath + " lvl: "+next.access+" authRes: "+authResult);
+        console.log("Interceptor: try: "+next.originalPath + " lvl: "+next.access+" authRes: "+authResult);
         if (!authResult) {
             if(Auth.isLoggedIn()) {
-                console.log("Logged IN");
-                $location.path('/signin');
+                console.log("Interceptor: Logged IN");
+                $location.path(signInPage);
             }
             else {
-                $location.path('/signin');
+                console.log("Interceptor: NOT Logged IN navigate to sing in");
+                $location.path(signInPage);
+            }
+        }else{
+            if(next.originalPath==signInPage){
+                if(Auth.isLoggedIn()){
+                    $location.path(rootPage);
+                }
             }
         }
     });

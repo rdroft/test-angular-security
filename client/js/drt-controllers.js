@@ -14,9 +14,7 @@ app.controller('SignInCtrl', function ($scope, $rootScope, $location, Auth) {
     };
     $scope.singIn = function () {
         $scope.$on('LoginUpdated', function () {
-            console.log("got isLOggedin: "+Auth.isLoggedIn());
             if (Auth.isLoggedIn()) {
-                console.log("navigate to /");
                 $location.path("/");
             } else {
                 console.log("wrong passw: " + $scope.count);
