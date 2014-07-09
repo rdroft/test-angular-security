@@ -1,6 +1,6 @@
 <div ng-controller="SignInCtrl" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <div class="container">
-        <form class="form-signin" ng-submit="signIn()" role="form">
+        <form class="form-signin" role="form" ng-keypress="enterAction($event)">
             <h2 class="form-signin-heading">Please sign in</h2>
             <input type="email"  placeholder="Email address" ng-model="email" tabindex="1" autofocus/>
             <input type="password"  placeholder="Password" ng-model="password" tabindex="2"/><br/>

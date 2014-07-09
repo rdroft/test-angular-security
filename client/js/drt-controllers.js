@@ -6,6 +6,12 @@ app.controller('SignInCtrl', function ($scope, $rootScope, $location, Auth) {
     $scope.email = "user@drt.com";
     $scope.password = "123";
     $scope.count = 0;
+    $scope.enterAction = function(event){
+        if (event.which == 13) {
+            event.preventDefault();
+            $scope.singIn();
+        }
+    };
     $scope.singIn = function () {
         $scope.$on('LoginUpdated', function () {
             console.log("got isLOggedin: "+Auth.isLoggedIn());
