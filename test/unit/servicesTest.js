@@ -6,6 +6,7 @@ describe('AuthTest',function(){
     var auth;
     var rootScope;
     var exp;
+    var testUser = {username:'user@drt.com',role:2,password:'123'};
     //excuted before each "it" is run.
     beforeEach(function() {
         module('drt-services');
@@ -15,7 +16,8 @@ describe('AuthTest',function(){
         inject(function($rootScope){
             rootScope = $rootScope;
         });
-     //   spyOn(rootScope,'$broadcast').and.callThrough();
+        spyOn(rootScope,'$broadcast').andCallThrough();
+
     });
     it('Authorization Module exist',function(){
         expect(auth===undefined).toBe(false);
@@ -29,11 +31,16 @@ describe('AuthTest',function(){
     });
 
     it('check login',function(){
-       auth.login('user@drt.com',123);
+       auth.login(testUser.username,testUser.password);
        //spyOn($rootScope.user),);
        expect(rootScope.user === undefined).toBe(false);
-       expect(rootScope.user).toEqual({username:'user@drt.com',role:auth.userRoles.user,password:'123'});
-     //  expect(rootScope.$broadcast).toHaveBeenCalled();
+       expect(rootScope.user).toEqual(testUser);
+       expect(rootScope.$broadcast).toHaveBeenCalled();
+       expect(rootScope.$broadcast.callCount).toEqual(1);
     });
 
+    it('after login attempt event should be broadcasted',function(){
+       auth.login(testUser.username,testUser.password);
+       expect(rootScope.$broadcast.argsForCall).toEqual([['LoginUpdated']]);
+    });
 });
