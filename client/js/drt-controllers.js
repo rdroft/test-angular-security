@@ -54,7 +54,7 @@ app.controller('MainCtrl', function ($scope, Auth) {
     })
 });
 
-app.controller('DashboardCtrl', function($scope,  $modal) {
+app.controller('DashboardCtrl', function($scope, $modal) {
     $scope.createDraft = function() {
         var modalInstance = $modal.open({
             templateUrl : 'views/createdraft.html',
@@ -69,7 +69,9 @@ app.controller('DashboardCtrl', function($scope,  $modal) {
     };
 })
 
-var CreateDraftCtrl = function($scope, $modalInstance) {
+var CreateDraftCtrl = function($scope, $modalInstance,Integration) {
+    $scope.projects = Integration.projectList();
+    $scope.project = undefined;
     $scope.ok = function () {
         $modalInstance.close({name:$scope.name,extRef:{type:1,refid:0,name:'some refnmae'},project:{refid:0}});
     };

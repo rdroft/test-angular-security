@@ -51,4 +51,12 @@ describe('AuthTest',function(){
     it('test Document Service exist',function(){
        expect(document===undefined).toBe(false);
     });
+
+    it('test Ext Integration Service exist',function(){
+        inject(function(Integration){
+            expect(Integration==undefined).toBe(false);
+            expect( angular.isFunction(Integration.projectList)).toBe(true);
+            expect( angular.isFunction(Integration.userCaseList)).toBe(true);
+        })
+    })
 });

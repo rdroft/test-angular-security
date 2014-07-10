@@ -30,6 +30,16 @@ services.factory('Document',function($http,$rootScope){
         sendToReview: function(){}
     };
 });
+services.factory('Integration',function($http,$rootScope){
+    return {
+       userCaseList: function(){
+           return ['US0001','US0002','US1536b'];
+       },
+       projectList: function(){
+            return ['DBS','DBR','TFM','BASEM'];
+       }
+    };
+});
 services.factory('Auth',function($http,$rootScope,$cookieStore){
     var accessLevels = routingConfig.accessLevels;
     var userRoles = routingConfig.userRoles;
