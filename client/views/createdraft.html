@@ -3,11 +3,13 @@
         <h3 class="modal-title">Create draft</h3>
     </div>
     <div class="modal-body">
-            <input class="form-control" type="text" placeholder="Your Draft name"/><br/>
-            <input class="form-control" type="search" placeholder="Use Case Reference (Confluence of Jira)"><br/>
-            <input class="form-control" type="search" placeholder="project name"><br/>
+        <form submit-on-enter="ok">
+            <input class="form-control" type="text" placeholder="Diagram Name" tabindex="1" autofocus="true" autoselect-modal="x3" ng-click="" ng-model="name"/><br/>
+            <input class="form-control" type="search" placeholder="Use Case Reference (Confluence of Jira)" tabindex="2"/><br/>
+            <input class="form-control" type="search" placeholder="project name" tabindex="3"><br/>
+        </form>
     </div>
     <div class="modal-footer">
-        <button class="btn-primary" type="submit" ng-click="ok()">Create</button>
+        <button class="btn-primary" type="submit" ng-click="ok()" tabindex="4">Create</button>
     </div>
 </div>

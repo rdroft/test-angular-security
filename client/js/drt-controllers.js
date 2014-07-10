@@ -71,7 +71,7 @@ app.controller('DashboardCtrl', function($scope,  $modal) {
 
 var CreateDraftCtrl = function($scope, $modalInstance) {
     $scope.ok = function () {
-        $modalInstance.close();
+        $modalInstance.close({name:$scope.name,extRef:{type:1,refid:0,name:'some refnmae'},project:{refid:0}});
     };
 
     $scope.cancel = function () {

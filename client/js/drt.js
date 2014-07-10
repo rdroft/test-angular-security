@@ -30,3 +30,29 @@ var app = angular.module('drt', ['drt-services','drt-controllers',"ui.bootstrap"
         });
     });
 
+app.directive('autoselectModal',function($timeout){
+    return {
+        restrict: 'AC',
+        link: function(_scope, _element) {
+            $timeout(function(){
+                _element[0].focus();
+            }, 40);
+        }
+    };
+});
+
+app.directive('submitOnEnter',function(){
+    return {
+        restrict: 'A',
+        link:function($scope,element,attrs){
+              var func = attrs.submitOnEnter;
+                element[0].onkeydown = function(event){
+                    if (event.which == 13) {
+                        event.preventDefault();
+                        $scope[func]();
+                    }
+                };
+
+        }
+    };
+});
