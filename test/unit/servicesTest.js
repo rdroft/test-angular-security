@@ -4,6 +4,7 @@
 "use strict";
 describe('AuthTest',function(){
     var auth;
+    var document;
     var rootScope;
     var testUser = {username:'user@drt.com',role:2,password:'123'};
     //excuted before each "it" is run.
@@ -14,6 +15,10 @@ describe('AuthTest',function(){
         });
         inject(function($rootScope){
             rootScope = $rootScope;
+        });
+
+        inject(function(Document){
+            document = Document;
         });
         spyOn(rootScope,'$broadcast').andCallThrough();
 
@@ -41,5 +46,9 @@ describe('AuthTest',function(){
     it('after login attempt event should be broadcasted',function(){
        auth.login(testUser.username,testUser.password);
        expect(rootScope.$broadcast.argsForCall).toEqual([['LoginUpdated']]);
+    });
+
+    it('test Document Service exist',function(){
+       expect(document===undefined).toBe(false);
     });
 });

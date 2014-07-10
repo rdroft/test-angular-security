@@ -24,7 +24,12 @@
 })(typeof exports === 'undefined' ? this['routingConfig'] = {} : exports);
 
 var services = angular.module('drt-services',['ngCookies','ngRoute']);
-
+services.factory('Document',function($http,$rootScope){
+    return {
+        createDraft: function(){},
+        sendToReview: function(){}
+    };
+});
 services.factory('Auth',function($http,$rootScope,$cookieStore){
     var accessLevels = routingConfig.accessLevels;
     var userRoles = routingConfig.userRoles;
