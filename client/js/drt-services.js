@@ -24,15 +24,25 @@
 })(typeof exports === 'undefined' ? this['routingConfig'] = {} : exports);
 
 var services = angular.module('drt-services',['ngCookies','ngRoute']);
-services.factory('Document',function($http,$rootScope){
-    return {
-        createDraft: function(){},
-        sendToReview: function(){}
-    };
+services.factory('DocumentService',function($http,$rootScope){
+    var storage = [];
+        return{
+            retrieve: function (id) {
+                return storage[id];
+            },
+            save: function (document) {
+                storage.push(document);
+                var id = storage.length-1;
+                console.log('save '+id+" "+JSON.stringify(document));
+                return id;
+            },
+            sendToReview: function () {
+            }
+        };
 });
 services.factory('Integration',function($http,$rootScope){
     return {
-       userCaseList: function(){
+       useCaseList: function(){
            return ['US0001','US0002','US1536b'];
        },
        projectList: function(){

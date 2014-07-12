@@ -17,8 +17,8 @@ describe('AuthTest',function(){
             rootScope = $rootScope;
         });
 
-        inject(function(Document){
-            document = Document;
+        inject(function(DocumentService){
+            document = DocumentService;
         });
         spyOn(rootScope,'$broadcast').andCallThrough();
 
@@ -56,7 +56,7 @@ describe('AuthTest',function(){
         inject(function(Integration){
             expect(Integration==undefined).toBe(false);
             expect( angular.isFunction(Integration.projectList)).toBe(true);
-            expect( angular.isFunction(Integration.userCaseList)).toBe(true);
+            expect( angular.isFunction(Integration.useCaseList)).toBe(true);
         })
     })
 });

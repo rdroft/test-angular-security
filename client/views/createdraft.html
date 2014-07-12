@@ -4,9 +4,9 @@
     </div>
     <div class="modal-body">
         <form submit-on-enter="ok">
-            <input class="form-control" type="text" placeholder="Diagram Name" tabindex="1" autofocus="true" autoselect-modal="x3" ng-click="" ng-model="name"/><br/>
-            <input class="form-control" type="search" placeholder="Use Case Reference (Confluence of Jira)" tabindex="2"/><br/>
-            <input class="form-control" type="search" placeholder="project name" tabindex="3"><br/>
+            <input  ng-model="draft.name" class="form-control" type="text" placeholder="Diagram Name" tabindex="1" autofocus="true" autoselect-modal="x3"/><br/>
+            <input  nm-model="draft.usecase" class="form-control" type="search" placeholder="Use Case Reference (Confluence of Jira)" tabindex="2"/><br/>
+            <input  ng-model="draft.project"  class="form-control" type="search" placeholder="project name" tabindex="3"><br/>
         </form>
     </div>
     <div class="modal-footer">

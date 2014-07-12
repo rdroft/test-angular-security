@@ -54,29 +54,43 @@ app.controller('MainCtrl', function ($scope, Auth) {
     })
 });
 
-app.controller('DashboardCtrl', function($scope, $modal) {
+app.controller('DashboardCtrl', function($scope, $modal,$location) {
+
     $scope.createDraft = function() {
         var modalInstance = $modal.open({
             templateUrl : 'views/createdraft.html',
             controller : CreateDraftCtrl,
             size: 'sm'
         });
-        modalInstance.result.then(function(){
-            console.log("Modal Closed");
+        modalInstance.result.then(function(id){
+        $location.path('/draft/'+id);
         },function(){
             console.log("Modal Closed");
         });
     };
-})
+});
+app.controller('DraftCtrl',function($scope,$routeParams,DocumentService){
+  $scope.document_id = $routeParams.id;
+  $scope.doc =  DocumentService.retrieve($scope.document_id);
+});
 
-var CreateDraftCtrl = function($scope, $modalInstance,Integration) {
+var CreateDraftCtrl = function($scope, $modalInstance,Integration,DocumentService) {
     $scope.projects = Integration.projectList();
-    $scope.project = undefined;
+    $scope.draft = {
+        id:0,
+        name:undefined,
+        project:undefined,
+        useCase:undefined,
+        key: 'w2'
+    };
+    $scope.name = undefined;
     $scope.ok = function () {
-        $modalInstance.close({name:$scope.name,extRef:{type:1,refid:0,name:'some refnmae'},project:{refid:0}});
+       var id = DocumentService.save($scope.draft);
+        $modalInstance.close(id);
     };
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 };
+app.controller('CreateDraftCtrl',CreateDraftCtrl);

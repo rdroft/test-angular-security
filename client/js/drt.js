@@ -28,6 +28,11 @@ var app = angular.module('drt', ['drt-services','drt-controllers',"ui.bootstrap"
             templateUrl: 'views/restorepasswd.html',
             access: access.public
         });
+        $routeProvider.when('/draft/:id',{
+            templateUrl: 'views/draft.html',
+            access: access.user,
+            controller: 'DraftCtrl'
+        })
     });
 
 app.directive('autoselectModal',function($timeout){
