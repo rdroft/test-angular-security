@@ -54,8 +54,8 @@ app.controller('MainCtrl', function ($scope, Auth) {
     })
 });
 
-app.controller('DashboardCtrl', function($scope, $modal,$location) {
-
+app.controller('DashboardCtrl', function($scope, $modal,$location,DocumentService) {
+    $scope.drafts = DocumentService.list;
     $scope.createDraft = function() {
         var modalInstance = $modal.open({
             templateUrl : 'views/createdraft.html',

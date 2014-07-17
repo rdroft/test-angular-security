@@ -4,7 +4,12 @@
         <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
                 <h5>Drafts <a href="" ng-click="createDraft()">[+]</a></h5>
-
+                <table width="100%">
+                    <tr ng-repeat="draft in drafts">
+                        <td><a href="#/draft/{{draft.id}}">{{draft.name}}</a></td>
+                        <td>{{draft.id}}</td>
+                    </tr>
+                </table>
             </div>
            <div class="col-xs-6 col-sm-3 placeholder">
                <h5>Awaiting For Review</h5>

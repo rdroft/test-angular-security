@@ -25,19 +25,29 @@
 
 var services = angular.module('drt-services',['ngCookies','ngRoute']);
 services.factory('DocumentService',function($http,$rootScope){
-    var storage = [];
+    var storage = [
+        {id:0,name:'US-1847a',project:'DBS',useCase:'US-1847a',status:1},
+        {id:1,name:'Email',project:'DBS',useCase:'US-1848a',status:2},
+        {id:2,name:'Push',project:'DBS',useCase:'US-1847a',status:3},
+        {id:3,name:'US-1111a',project:'DBS',useCase:'US-1847a',status:4},
+        {id:4,name:'US-1234a',project:'DBS',useCase:'US-1847a',status:1},
+        {id:5,name:'US-5678a',project:'DBS',useCase:'US-1847a',status:2}
+    ];
+
         return{
             retrieve: function (id) {
                 return storage[id];
             },
             save: function (document) {
+                var id = storage.length;
+                document.id = id;
                 storage.push(document);
-                var id = storage.length-1;
                 console.log('save '+id+" "+JSON.stringify(document));
                 return id;
             },
             sendToReview: function () {
-            }
+            },
+            list: storage
         };
 });
 services.factory('Integration',function($http,$rootScope){
