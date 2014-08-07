@@ -61,3 +61,28 @@ app.directive('submitOnEnter',function(){
         }
     };
 });
+
+app.directive('colorMarker',function(){
+    function link(scope, element, attrs) {
+        var color = 'green';
+        var cl = attrs.colorMarker;
+        switch (cl) {
+            case 1:
+                color = 'red';
+                break;
+            case 2:
+                color = 'blue';
+                break
+            case 3:
+                color = 'yellow'
+                break;
+            default:
+                color = 'black';
+        }
+        element.innerHTML=	'<div style="width: 7px;height: 7px;background-color:' +color+'">&nbsp;</div>';
+
+    };
+    return{
+        link:link
+    }
+});

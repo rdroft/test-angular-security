@@ -80,8 +80,9 @@ var CreateDraftCtrl = function($scope, $modalInstance,Integration,DocumentServic
         id:0,
         name:undefined,
         project:undefined,
-        useCase:undefined,
-        key: 'w2'
+        vvvv:'N/A',
+        status:1,
+        key: 'w3'
     };
     $scope.name = undefined;
     $scope.ok = function () {
